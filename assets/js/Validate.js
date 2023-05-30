@@ -2,7 +2,8 @@ const btnSubmit = document.querySelector("#form-submit");
 const popup = document.getElementById("popup");
 
 var isValid = false;
-
+// input là mảng lưu các  input object - thông tin của mỗi input được chỉ định ;
+// chẳng hạn như: tag input, thông báo lỗi, trạng thái xác minh,hàm xác minh
 var input = [
   (inputUserName = {
     element: document.getElementById("username"),
@@ -56,6 +57,10 @@ var input = [
     },
   }),
 ];
+
+// ở đây vì input chưa nhiều nên em hard code
+//input[0->3] ứng với các object trong mảng input bên trên
+// Mỗi khi input value thay đổi thì nó phải chạy các hàm xác minh 1 lần
 input[0].element.onchange = function () {
   Validation(input[0]);
   isValidation();
@@ -75,6 +80,8 @@ input[3].element.onchange = function () {
   isValidation();
 };
 
+// hàm này để xác định thẻ cha của một phần tử
+// selector là class mà thẻ cha đó đang có
 function getParent(element, selector) {
   while (element.parentElement) {
     if (element.parentElement.matches(selector)) {
@@ -85,18 +92,24 @@ function getParent(element, selector) {
   }
 }
 
+// /hàm này xử lí khi xác minh thấy có lỗi
+//kiểu xóa/ thêm phần css lỗi/thành công của từng tag gọi đến nó
 function setError(ele, message) {
   let parentEle = getParent(ele, ".form-group");
   parentEle.classList.remove("success");
   parentEle.classList.add("error");
   parentEle.querySelector(".form-message").innerText = message;
 }
+//hàm này xử lí khi xác minh thành công
 function setSuccess(ele) {
   let parentEle = getParent(ele, ".form-group");
   parentEle.classList.remove("error");
   parentEle.classList.add("success");
   parentEle.querySelector(".form-message").innerText = "";
 }
+
+//từng input object sẽ gọi đến hàm này và hàm này sẽ xử lí các trường hợp cần xác minh
+// như: kiểm tra null hay ko ?có hợp lệ với phần regex có sẵn ?
 function Validation(obj) {
   if (obj.element.value == "") {
     setError(obj.element, obj.message1);
@@ -111,6 +124,9 @@ function Validation(obj) {
   isValidation();
 }
 
+// hàm này để tổng kết lại xác minh của các input trên
+// khi tất cả các input trên hợp lệ thì nó cho phép ta Submit
+// ngược lại thì vô hiệu hóa btn Submit và display none phần popup
 function isValidation() {
   let validUserName = input[0].isValid;
   let validEmail = input[1].isValid;
@@ -129,6 +145,8 @@ function isValidation() {
   }
 }
 
+// khi submit : thành công thì show popup
+// còn lỗi thì lại vô hiệu hóa button Submuit
 btnSubmit.onclick = function (e) {
   e.preventDefault();
   if (isValid) {
