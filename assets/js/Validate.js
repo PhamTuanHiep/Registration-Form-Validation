@@ -2,6 +2,7 @@ const btnSubmit = document.querySelector("#form-submit");
 const popup = document.getElementById("popup");
 
 var isValid = false;
+btnSubmit.classList.add("disabled");
 // input là mảng lưu các  input object - thông tin của mỗi input được chỉ định ;
 // chẳng hạn như: tag input, thông báo lỗi, trạng thái xác minh,hàm xác minh
 var input = [
@@ -23,7 +24,8 @@ var input = [
     isValid: false,
     Valid: function (value) {
       let regex =
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // /^([a-zA-Z0-9][\w+-]+(?:\.\w+)?)@([\w-]+(?:\.[a-zA-Z0-9]{2,10})+)$/;
+        /^(([^<>()\[\]\\.,;:\s@"]{2,}(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return regex.test(value);
     },
   }),
@@ -37,10 +39,18 @@ var input = [
       let passConfValue = input[3].element.value || "";
       if (passConfValue != "") {
         Validation(input[3]);
-        if (passConfValue !== value) {
-          this.message2 = "password and password verification do not match";
+        console.log("1: ", this);
+        if (this.isValid == true) {
+          console.log("2: ", this);
+          if (passConfValue !== value) {
+            this.message2 = "password and password verification do not match";
+          }
+          return regex.test(value) && passConfValue === value;
+        } else {
+          this.message2 = "Invalid password";
+
+          return regex.test(value);
         }
-        return regex.test(value) && passConfValue === value;
       } else {
         return regex.test(value);
       }
