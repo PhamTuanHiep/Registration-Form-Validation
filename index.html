@@ -12,35 +12,37 @@
     <div id="main">
         <div class="container ">
             <div class="content">
-                <form action="" class="form">
+                <div id="popup">
+                    Register success !
+                </div>
+                <form action="" class="form" id="form-register">
                     <h1 class="form-title">Registration</h1>
                     <div class="form-group">
-                        <label class="form-label" for="name">User Name:</label>
-                        <input type="text" class="form-control" id="name" placeholder="enter name">
+                        <label class="form-label" for="username">User Name:</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="enter name">
                         <span class="form-message"></span>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="enter email">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="enter email">
                         <span class="form-message"></span>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" placeholder="enter password">
+                        <input type="text" class="form-control" id="password" name="password" placeholder="enter password">
                         <span class="form-message"></span>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="password_confirm">Password again:</label>
-                        <input type="password" class="form-control" id="password_confirm" placeholder="enter password again">
+                        <input type="text" class="form-control" id="password_confirm" name="password_confirm" placeholder="enter password again">
                         <span class="form-message"></span>
                     </div>
-                    <button class="form-submit">
-                        <a href="#">Submit</a>
-                    </button>
+                    <br>
+                    <button id="form-submit" >Submit</button>
                 </form>
             </div>
         </div>
-        <script src="./assets/js/main.js"></script>
     </div>
+    <script src="./assets/js/Validate.js"></script>
 </body>
 </html>
